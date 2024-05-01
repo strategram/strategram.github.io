@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>:The Process:</title>
+    <style>/* styles.css */
+
+/* styles.css */
+
+body {
+    background-color: black;
+    background-image: radial-gradient(
+        rgba(0, 150, 0, 0.75), black 120%
+    );
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    padding: 2rem;
+    color: white;
+    font: 1.3rem Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+}
+
+::selection {
+    background: #0080FF;
+    text-shadow: none;
+}
+
+input, textarea {
+    background-color: #2d2d2d;
+    color: #cccccc;
+    border: 1px solid #4d4d4d;
+    font: 1.3rem Inconsolata, monospace;
+}
+
+button {
+    background-color: #4d4d4d;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font: 1.3rem Inconsolata, monospace;
+}
+
+button:hover {
+    background-color: #666666;
+}
+
+pre {
+    margin: 0;
+}
+
+#scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('https://33.media.tumblr.com/8365abbe8f6b9b01875c02ff9202cb0d/tumblr_nc1joq3TTN1t4tes2o1_400.gif');
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+</style>
+    <script>// script.js
+
+// Acceptable passphrases
+const validPassphrases = ["crash", "votive", "oracle", "circulation"];
+
+// Check passphrase
+function checkPassphrase() {
+    const input = document.getElementById("passphrase").value.toLowerCase().trim();
+    const errorMsg = document.getElementById("error-message");
+
+    if (validPassphrases.includes(input)) {
+        document.getElementById("landing").style.display = "none";
+        document.getElementById("terminal").style.display = "block";
+        updateCountdown();
+        startCoordinateGlitch();
+    } else {
+        errorMsg.innerText = "Invalid. Try again.";
+        errorMsg.style.color = "#ff6666";
+    }
+}
+
+
+// Countdown Timer
+function updateCountdown() {
+    const eventDate = new Date("May 11, 2024 17:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const difference = eventDate - now;
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("timer").innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    }, 1000);
+}
+
+// Terminal Functionality
+function processTerminalInput() {
+    const input = document.getElementById("terminalInput").value.trim().toLowerCase();
+    const feedback = document.getElementById("terminalFeedback");
+
+    const responses = {
+        "help": "Available commands: help, echo [msg], names, exit.",
+        "echo": input.substr(5), // Echoes back whatever the user types after 'echo'
+        "names": "The child has many names; discover them to unveil the truth.",
+        "exit": "Closing terminal...",
+        "default": "Command not recognized."
+    };
+
+    if (input.startsWith("echo ")) {
+        feedback.innerText = responses.echo;
+    } else if (responses[input]) {
+        feedback.innerText = responses[input];
+    } else {
+        feedback.innerText = responses.default;
+    }
+}
+
+// Coordinate Glitching
+function startCoordinateGlitch() {
+    const coordinateDisplay = document.getElementById("coordinates");
+
+    setInterval(() => {
+        const latitude = (Math.random() * 180 - 90).toFixed(6);
+        const longitude = (Math.random() * 360 - 180).toFixed(6);
+        coordinateDisplay.innerText = `${latitude}, ${longitude}`;
+    }, 500);
+}
+</script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <p>:welcome.the process:</p>
+        </header>
+
+        <section id="landing">
+            <p>enter the passphrase</p>
+            <input type="text" id="passphrase" placeholder="Passphrase">
+            <button onclick="checkPassphrase()">Enter</button>
+            <p id="error-message"></p>
+        </section>
+
+        <section id="terminal" style="display:none;">
+            <h2>Terminal</h2>
+            <textarea id="terminalInput" rows="10" cols="50" placeholder="Type a command"></textarea>
+            <button onclick="processTerminalInput()">Execute</button>
+            <p id="terminalFeedback"></p>
+
+            <h3>Countdown to May 11, 2024, 5 PM:</h3>
+            <p id="timer"></p>
+
+            <h3>Coordinates:</h3>
+            <p id="coordinates"></p>
+        </section>
+    </div>
+<div id="scanlines"></div> <!-- Overlay for scanlines -->
+    </div>
+</body>
+</html>
