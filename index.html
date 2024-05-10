@@ -160,9 +160,31 @@ window.location.href = "ron.html"
 
             commandHistory.appendChild(commandOutput);
         }
+        // Add this after defining the 'audioPlayer' variables
+        
+var audioPlayer = document.getElementById("audioPlayer");
+
+// Function to start the audio immediately
+function startAudioImmediate() {
+  audio.volume = 0.5; // Set volume to 50%
+  audio.loop = true; // Loop the audio immediately
+  audio.play();
+}
+var audioPlayer2 = document.getElementById("audioPlayer2");
+// Function to start the command audio
+function startCommandAudio() {
+  audioPlayer2.volume = 0.5; // Set volume to 50%
+  setTimeout(function() {
+    audioPlayer2.loop = true; // Loop the command audio after 10 seconds
+    audioPlayer2.play();
+  }, 10000); // 10 seconds delay
+}
     </script>
 </head>
 <body>
+
+    <audio id="audioPlayer" src="https://raw.githubusercontent.com/strategram/strategram.github.io/master/wind.mp3>
+            <audio id="audioPlayer2" src="https://raw.githubusercontent.com/strategram/strategram.github.io/master/song.mp3>
     <div class="container">
         <header>
             <p>:closer... and closer... and closer...:<p>
