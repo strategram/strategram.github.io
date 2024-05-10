@@ -37,6 +37,19 @@
             content: "|";
             animation: blinkCursor 1s infinite;
         }
+        #command-screen {
+              background-color: black;
+            background-image: radial-gradient(
+                rgba(0, 0, 0, 0), black 120%
+            );
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            padding: 2rem;
+            color: red;
+            font: 1.3rem Inconsolata, monospace;
+            text-shadow: 0 0 5px #C8C8C8;
+        }
 
         @keyframes blinkCursor {
             0%, 50% { opacity: 1; }
@@ -101,33 +114,33 @@
 
             const commandOutput = document.createElement("p");
             switch(command) {
-                case "story":
-                    commandOutput.innerText = "Story: Computers have revolutionized...";
+                case "lore":
+                    commandOutput.innerText = "ever wonder where you came from? i'll give you a hint: it's large and it's rock and it orbits the earth. ";
                     break;
                 case "exit":
                     window.location.reload();
                     return;
                 case "help":
-                    commandOutput.innerText = "story exit help name when where link regan";
+                    commandOutput.innerText = "lore exit help name when where link regan";
                     break;
                 case "name":
-                    commandOutput.innerText = "Name: The term 'computer' comes from...";
+                    commandOutput.innerText = "...";
                     break;
                 case "when":
-                    const may11Date = new Date('2024-05-11T17:00:00');
+                    const may11Date = new Date('2024-06-01T17:00:00');
                     const now = new Date();
                     const diffMs = may11Date - now;
                     const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                    commandOutput.innerText = `Countdown to May 11, 2024, 5 PM: ${days} days`;
+                    commandOutput.innerText = `Countdown to June 1, 2024, 5 PM: ${days} days`;
                     break;
                 case "where":
-                    commandOutput.innerText = "Coordinates will be revealed soon.";
+                    commandOutput.innerText = "who can say...";
                     break;
                 case "link":
-                    window.location.href = "page.html";
+                    window.location.href = "https://xtramagazine.com/power/moon-is-lesbian-wet-water-nasa-184072";
                     return;
                 case "regan":
-                    window.location.href = "regan.png";
+                    window.location.href = "ron.html";
                     return;
                 default:
                     commandOutput.innerText = "Unknown command.";
@@ -153,8 +166,8 @@
         <section id="command-screen" style="display:none;">
             <p>Are you ready to lose your mind?</p>
 
-            <p>this is where</p>
-            <p>THIS IS PROCESS</p>
+            <p>type "help" to view commands</p>
+            <p>you're here... you're here...</p>
 
             <div id="command-screen-history"></div>
         </section>
