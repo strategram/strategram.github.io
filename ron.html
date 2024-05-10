@@ -22,8 +22,10 @@
   border: 1px solid #d3d3d3;
   text-align: center;
 }
-#john {  position: absolute;
-        top: 80px;
+
+#john {
+  position: absolute;
+  top: 80px;
   right: 0;
   width: 200px;
   height: 100px;
@@ -32,7 +34,8 @@
   border: 1px solid #d3d3d3;
   text-align: center;
 }
-#mydivheader {
+
+.mydivheader {
   padding: 10px;
   cursor: move;
   z-index: 10;
@@ -46,51 +49,34 @@
 
 <div id="ronaldregan">
   <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
-  <div id="mydivheader">Click here to move</div>
+  <div class="mydivheader">Click here to move</div>
  <img src="ron8.webp" alt="ronaldregan">
 </div>
 
 <div id="john">
   <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
-  <div id="mydivheader">Click here to move</div>
+  <div class="mydivheader">Click here to move</div>
  <img src="john.png" alt="john">
 
 <button onclick="startAudio()">Click here for a song</button>
 
 <div id="playerControls" style="display: none;">
-  <audio id="audioPlayer" <audio id="audioPlayer" src="https://raw.githubusercontent.com/strategram/strategram.github.io/master/free.mp3"></audio>
+  <audio id="audioPlayer" src="https://raw.githubusercontent.com/strategram/strategram.github.io/master/free.mp3"></audio>
   <!-- Progress bar -->
   <input type="range" id="progressBar" value="0" step="1" style="width: 100%;" onchange="seekAudio()">
 </div>
 </div>
 
 <script>
-var audio = document.getElementById("audioPlayer");
-var progressBar = document.getElementById("progressBar");
+// Make the draggable elements draggable
+dragElement(document.getElementById("ronaldregan"));
+dragElement(document.getElementById("john"));
 
-audio.addEventListener("timeupdate", updateProgressBar);
-
-function updateProgressBar() {
-  var percentage = (audio.currentTime / audio.duration) * 100;
-  progressBar.value = percentage;
-}
-
-function seekAudio() {
-  var seekTo = audio.duration * (progressBar.value / 100);
-  audio.currentTime = seekTo;
-}
-  // Make the DIV element draggable:
-dragElement(document.getElementById("mydiv"));
-
+// Function to make an element draggable
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
+  var header = elmnt.querySelector('.mydivheader');
+  header.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     e = e || window.event;
@@ -121,6 +107,28 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+}
+
+// Audio player functionality
+var audio = document.getElementById("audioPlayer");
+var progressBar = document.getElementById("progressBar");
+
+audio.addEventListener("timeupdate", updateProgressBar);
+
+function updateProgressBar() {
+  var percentage = (audio.currentTime / audio.duration) * 100;
+  progressBar.value = percentage;
+}
+
+function seekAudio() {
+  var seekTo = audio.duration * (progressBar.value / 100);
+  audio.currentTime = seekTo;
+}
+
+function startAudio() {
+  var playerControls = document.getElementById("playerControls");
+  playerControls.style.display = "block";
+  audio.play();
 }
 </script>
 
