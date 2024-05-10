@@ -18,8 +18,9 @@
 #ronaldregan {
   position: absolute;
   z-index: 7;
-  right: 50%;
-  bottom: 85%;
+  width: 50%;
+  left: 25%;
+  top: 10%;
   background-color: #f1f1f1;
   border: 3px solid #d3d3d3;
   text-align: center;
@@ -27,12 +28,9 @@
 
 #john {
   position: absolute;
-  bottom: 20%;
-  right: 55%;
-  width: 30%;
-  z-index: 9;
-  background-color: #f1f1f1;
-  border: 3px solid #d3d3d3;
+  top: calc(10% + 50px); /* Adjust this value as needed */
+  left: 0;
+  width: 100%;
   text-align: center;
 }
 
@@ -49,7 +47,7 @@
 <body>
 
 <div id="ronaldregan">
-  <img src="ron8.webp" alt="ronaldregan">
+  <img src="ron8.webp" alt="ronaldregan" style="width: 100%;">
 </div>
 
 <div id="john">
