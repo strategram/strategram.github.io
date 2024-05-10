@@ -147,8 +147,16 @@ bottom: 50%;
                     window.location.href = "https://xtramagazine.com/power/moon-is-lesbian-wet-water-nasa-184072";
                     return;
                 case "regan":
-    window.location.href = "ron.html";
+
+    var iframe = document.createElement('iframe');
+    iframe.src = 'ron.html';
+    iframe.width = '800';
+    iframe.height = '600';
+    iframe.frameBorder = '0';
+    iframe.style.border = '1px solid black';
+    document.body.appendChild(iframe);
     return;
+
                 default:
                     commandOutput.innerText = "Unknown command.";
                     commandOutput.style.color = "#ff6666";
