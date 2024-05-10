@@ -15,11 +15,12 @@
     cursor: pointer;
     padding: 0;
   }
+#ronaldregan {
   position: absolute;
-width=50%;
+  width: 50%;
   z-index: 7;
-right: 50%;
-bottom:85%;
+  right: 50%;
+  bottom: 85%;
   background-color: #f1f1f1;
   border: 3px solid #d3d3d3;
   text-align: center;
@@ -30,7 +31,6 @@ bottom:85%;
   bottom: 20%;
   right: 55%;
   width: 30%;
-
   z-index: 9;
   background-color: #f1f1f1;
   border: 3px solid #d3d3d3;
@@ -50,22 +50,17 @@ bottom:85%;
 <body>
 
 <div id="ronaldregan">
-  <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
- 
- <img src="ron8.webp" alt="ronaldregan">
+  <img src="ron8.webp" alt="ronaldregan">
 </div>
 
 <div id="john">
-
- <img src="john.png" alt="john">
-
-<button onclick="startAudio()">Click here for a song</button>
-
-<div id="playerControls" style="display: none;">
-  <audio id="audioPlayer" src="https://raw.githubusercontent.com/strategram/strategram.github.io/master/free.mp3"></audio>
-  <!-- Progress bar -->
-  <input type="range" id="progressBar" value="0" step="1" style="width: 100%;" onchange="seekAudio()">
-</div>
+  <img src="john.png" alt="john">
+  <button onclick="startAudio()">Click here for a song</button>
+  <div id="playerControls" style="display: none;">
+    <audio id="audioPlayer" src="https://raw.githubusercontent.com/strategram/strategram.github.io/master/free.mp3"></audio>
+    <!-- Progress bar -->
+    <input type="range" id="progressBar" value="0" step="1" style="width: 100%;" onchange="seekAudio()">
+  </div>
 </div>
 
 <script>
@@ -76,8 +71,7 @@ dragElement(document.getElementById("john"));
 // Function to make an element draggable
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  var header = elmnt.querySelector('.mydivheader');
-  header.onmousedown = dragMouseDown;
+  elmnt.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     e = e || window.event;
