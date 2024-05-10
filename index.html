@@ -3,155 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <title>:The Process:</title>
-    <style>/* styles.css */
-
-body {
-    background-color: black;
-    background-image: radial-gradient(
-        rgba(0, 150, 0, 0.75), black 120%
-    );
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    padding: 2rem;
-    color: white;
-    font: 1.3rem Inconsolata, monospace;
-    text-shadow: 0 0 5px #C8C8C8;
-}
-
-#history {
-    margin: 0;
-}
-
-#passphrase-input {
-    display: inline;
-    border: none;
-    background: none;
-    color: inherit;
-    outline: none;
-    font: inherit;
-    cursor: text;
-}
-
-#passphrase-input::after {
-    content: "|";
-    animation: blinkCursor 1s infinite;
-}
-
-@keyframes blinkCursor {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
-
-#scanlines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('https://33.media.tumblr.com/8365abbe8f6b9b01875c02ff9202cb0d/tumblr_nc1joq3TTN1t4tes2o1_400.gif');
-    opacity: 0.2;
-    pointer-events: none;
-}</style>
-    <script>// script.js
-
-const validPassphrases = ["crash", "votive", "oracle", "circulation"];
-
-let inputText = ""; // Global variable to store current input
-let mode = "password"; // Track current mode
-
-document.addEventListener("keydown", function(event) {
-    const history = document.getElementById("history");
-    const passphraseInput = document.getElementById("passphrase-input");
-
-    if (event.key === "Backspace") {
-        inputText = inputText.slice(0, -1); // Remove last character
-    } else if (event.key.length === 1) {
-        inputText += event.key.toLowerCase(); // Add character to input
-    } else if (event.key === "Enter") {
-        const userInput = document.createElement("p");
-        userInput.innerText = inputText;
-        history.appendChild(userInput);
-
-        if (mode == "password") {
-            if (validPassphrases.includes(inputText)) {
-                mode = "command"; // Switch to command mode
-                document.getElementById("password-prompt").style.display = "none"; // Hide password prompt
-                document.getElementById("command-screen").style.display = "block"; // Reveal command screen
-            } else {
-                const errorMsg = document.createElement("p");
-                errorMsg.innerText = "Invalid password. Try again.";
-                errorMsg.style.color = "#ff6666";
-                history.appendChild(errorMsg);
-            }
-        } else {
-            processCommand(inputText); // Process command
+    <style>
+        /* styles.css */
+        body {
+            background-color: black;
+            background-image: radial-gradient(
+                rgba(0, 150, 0, 0.75), black 120%
+            );
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            padding: 2rem;
+            color: white;
+            font: 1.3rem Inconsolata, monospace;
+            text-shadow: 0 0 5px #C8C8C8;
         }
 
-        inputText = ""; // Reset input
-    }
+        #history {
+            margin: 0;
+        }
 
-    passphraseInput.innerText = inputText + "_"; // Update input display
-});
+        #passphrase-input {
+            display: inline;
+            border: none;
+            background: none;
+            color: inherit;
+            outline: none;
+            font: inherit;
+            cursor: text;
+        }
 
-function processCommand(command) {
-    const commandHistory = document.getElementById("command-screen-history");
+        #passphrase-input::after {
+            content: "|";
+            animation: blinkCursor 1s infinite;
+        }
 
-    const commandOutput = document.createElement("p");
-    switch(command) {
-        case "story":
-            commandOutput.innerText = "Story: Computers have revolutionized...";
-            break;
-        case "exit":
-            window.location.reload();
-            return;
-        case "name":
-            commandOutput.innerText = "Name: The term 'computer' comes from...";
-            break;
-        case "when":
-            const may11Date = new Date('2024-05-11T17:00:00');
-            const now = new Date();
-            const diffMs = may11Date - now;
-            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-            commandOutput.innerText = `Countdown to May 11, 2024, 5 PM: ${days} days`;
-            break;
-        case "where":
-            commandOutput.innerText = "Coordinates will be revealed soon.";
-            break;
-        case "link":
-            window.location.href = "page.html";
-            return;
-        case "regan":
-            window.location.href = "regan.png";
-            return;
-        default:
-            commandOutput.innerText = "Unknown command.";
-            commandOutput.style.color = "#ff6666";
-    }
+        @keyframes blinkCursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
 
-    commandHistory.appendChild(commandOutput);
-}
+        #scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('https://33.media.tumblr.com/8365abbe8f6b9b01875c02ff9202cb0d/tumblr_nc1joq3TTN1t4tes2o1_400.gif');
+            opacity: 0.2;
+            pointer-events: none;
+        }
+    </style>
+    <script>
+        // script.js
+        const validPassphrases = ["crash", "votive", "oracle", "circulation"];
 
-</script>
+        let inputText = ""; // Global variable to store current input
+        let mode = "password"; // Track current mode
+
+        document.addEventListener("keydown", function(event) {
+            const history = document.getElementById("history");
+            const passphraseInput = document.getElementById("passphrase-input");
+
+            if (event.key === "Backspace") {
+                inputText = inputText.slice(0, -1); // Remove last character
+            } else if (event.key.length === 1) {
+                inputText += event.key.toLowerCase(); // Add character to input
+            } else if (event.key === "Enter") {
+                const userInput = document.createElement("p");
+                userInput.textContent = inputText;
+                history.appendChild(userInput);
+
+                if (mode == "password") {
+                    if (validPassphrases.includes(inputText)) {
+                        mode = "command"; // Switch to command mode
+                        document.getElementById("password-prompt").style.display = "none"; // Hide password prompt
+                        document.getElementById("command-screen").style.display = "block"; // Reveal command screen
+                    } else {
+                        const errorMsg = document.createElement("p");
+                        errorMsg.innerText = "Invalid password. Try again.";
+                        errorMsg.style.color = "#ff6666";
+                        history.appendChild(errorMsg);
+                    }
+                } else {
+                    processCommand(inputText); // Process command
+                }
+
+                inputText = ""; // Reset input
+            }
+
+            // Update input display with input text and cursor
+            passphraseInput.textContent = inputText + "_"; 
+        });
+
+        function processCommand(command) {
+            const commandHistory = document.getElementById("command-screen-history");
+
+            const commandOutput = document.createElement("p");
+            switch(command) {
+                case "story":
+                    commandOutput.innerText = "Story: Computers have revolutionized...";
+                    break;
+                case "exit":
+                    window.location.reload();
+                    return;
+                case "help":
+                    commandOutput.innerText = "story exit help name when where link regan";
+                    break;
+                case "name":
+                    commandOutput.innerText = "Name: The term 'computer' comes from...";
+                    break;
+                case "when":
+                    const may11Date = new Date('2024-05-11T17:00:00');
+                    const now = new Date();
+                    const diffMs = may11Date - now;
+                    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                    commandOutput.innerText = `Countdown to May 11, 2024, 5 PM: ${days} days`;
+                    break;
+                case "where":
+                    commandOutput.innerText = "Coordinates will be revealed soon.";
+                    break;
+                case "link":
+                    window.location.href = "page.html";
+                    return;
+                case "regan":
+                    window.location.href = "regan.png";
+                    return;
+                default:
+                    commandOutput.innerText = "Unknown command.";
+                    commandOutput.style.color = "#ff6666";
+            }
+
+            commandHistory.appendChild(commandOutput);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <header>
-            <p>:The Process:<p>
+            <p>:closer... and closer... and closer...:<p>
         </header>
 
         <section id="password-prompt">
-            <p>Enter the passphrase:</p>
+            <p>enter code:</p>
              <div id="history"></div>
             <p id="passphrase-input">_</p>
         </section>
 
         <section id="command-screen" style="display:none;">
-            <p>MAY11:21:00HRS</p>
-<p>LOCATION:MAY11:1:00HRS</p>
-<p>THIS IS PROCESS</p>
+            <p>Are you ready to lose your mind?</p>
 
-             <div id="command-screen-history"></div>
+            <p>this is where</p>
+            <p>THIS IS PROCESS</p>
+
+            <div id="command-screen-history"></div>
         </section>
     </div>
     <div id="scanlines"></div>
